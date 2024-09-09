@@ -1,38 +1,65 @@
 .App {
-  text-align: center;
+  padding: 10px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.masonry-layout {
+  column-gap: 1em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1em;
+  background-color: lightgray;
+  border: 1px solid lightblue;
+  border-radius: 20px;
+  padding: 15px;
+  box-sizing: border-box;
+  position: relative; /* For shimmer overlay */
+  overflow: hidden; /* To hide the shimmer that goes outside */
+}
+
+/* Shimmer effect */
+.masonry-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%; /* Start off-screen */
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  animation: shimmer 1.5s infinite;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 150%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (min-width:576px) {
+  .masonry-layout {
+    column-count: 2;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (min-width: 768px) {
+  .masonry-layout {
+    column-count: 4;
+  }
+}
+
+@media (min-width: 992px) {
+  .masonry-layout {
+    column-gap: 6;
+  }
+}
+
+@media (min-width: 1200px) {
+  .masonry-layout {
+    column-gap: 8;
   }
 }
